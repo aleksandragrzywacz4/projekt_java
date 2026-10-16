@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<movies>
+    <movie>
+        <id>1</id>
+        <title>Gladiator II</title>
+        <genre>Akcja</genre>
+    </movie>
+
+    <movie>
+        <id>2</id>
+        <genre>Animacja</genre>
+    </movie>
+
+    <movie>
+        <id>3</id>
+        <title>Dune: Część druga</title>
+        <genre></genre>
+    </movie>
+
+    <movie>
+        <id>abc</id>
+        <title>Joker: Folie à deux</title>
+        <genre>Dramat</genre>
+    </movie>
+
+    <movie>
+        <id>-5</id>
+        <title>Avatar</title>
+        <genre>Sci-Fi</genre>
+    </movie>
+
+    <movie>
+        <id>6</id>
+        <title>Incepcja</title>
+        <genre>Sci-Fi</genre>
+    </movie>
+</movies>
