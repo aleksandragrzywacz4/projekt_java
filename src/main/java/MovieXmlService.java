@@ -65,7 +65,7 @@ public class MovieXmlService {
         parent.appendChild(element);
     }
 
-    // Odczyt filmów z XML do listy obiektów
+
     public static List<Movie> loadMovies(Path path) throws Exception {
 
         List<Movie> movies = new ArrayList<>();
@@ -88,21 +88,61 @@ public class MovieXmlService {
 
             Element element = (Element) movieNodes.item(i);
 
-            int id = Integer.parseInt(
-                    element.getElementsByTagName("id")
-                            .item(0).getTextContent()
-            );
+            try {
+                String idText = getRequiredField(element, "id");
+                String title = getRequiredField(element, "title");
+                String genre = getRequiredField(element, "genre");
 
-            String title = element.getElementsByTagName("title")
-                    .item(0).getTextContent();
+                int id;
 
-            String genre = element.getElementsByTagName("genre")
-                    .item(0).getTextContent();
+                try {
+                    id = Integer.parseInt(idText);
+                } catch (NumberFormatException e) {
+                    throw new InvalidMovieException(
+                            "ID filmu musi być liczbą całkowitą."
+                    );
+                }
 
-            Movie movie = new Movie(id, title, genre);
-            movies.add(movie);
+                if (id <= 0) {
+                    throw new InvalidMovieException(
+                            "ID filmu musi być większe od 0."
+                    );
+                }
+
+                Movie movie = new Movie(id, title, genre);
+                movies.add(movie);
+
+            } catch (InvalidMovieException e) {
+                System.out.println(
+                        "Nie można utworzyć filmu nr " + (i + 1)
+                                + ": " + e.getMessage()
+                );
+            }
         }
 
         return movies;
     }
+
+    private static String getRequiredField(Element element, String fieldName)
+            throws InvalidMovieException {
+
+        NodeList nodes = element.getElementsByTagName(fieldName);
+
+        if (nodes.getLength() == 0) {
+            throw new InvalidMovieException(
+                    "Brakuje wymaganego pola: " + fieldName
+            );
+        }
+
+        String value = nodes.item(0).getTextContent().trim();
+
+        if (value.isEmpty()) {
+            throw new InvalidMovieException(
+                    "Pole " + fieldName + " nie może być puste."
+            );
+        }
+
+        return value;
+    }
+
 }

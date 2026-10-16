@@ -117,5 +117,23 @@ public class Main {
             System.err.println("Błąd XML: " + e.getMessage());
         }
 
+        // LAB 3.2 - Walidacja XML i obsługa wyjątków
+        System.out.println("\nLAB 3.2 - Walidacja XML");
+
+        Path invalidXmlPath = Paths.get("movies-invalid.xml");
+
+        try {
+            List<Movie> validMovies = MovieXmlService.loadMovies(invalidXmlPath);
+
+            System.out.println("\nPoprawnie odczytane filmy:");
+            validMovies.forEach(System.out::println);
+
+            System.out.println("\nLiczba poprawnych filmów: "
+                    + validMovies.size());
+
+        } catch (Exception e) {
+            System.err.println("Błąd odczytu XML: " + e.getMessage());
+        }
+
     }
 }

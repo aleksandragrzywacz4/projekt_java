@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<movies>
+    <movie>
+        <id>1</id>
+        <title>Gladiator II</title>
+        <genre>Akcja</genre>
+    </movie>
+    <movie>
+        <id>2</id>
+        <title>W głowie się nie mieści 2</title>
+        <genre>Animacja</genre>
+    </movie>
+    <movie>
+        <id>3</id>
+        <title>Dune: Część druga</title>
+        <genre>Sci-Fi</genre>
+    </movie>
+    <movie>
+        <id>4</id>
+        <title>Joker: Folie à deux</title>
+        <genre>Dramat</genre>
+    </movie>
+</movies>
