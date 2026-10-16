@@ -86,5 +86,36 @@ public class Main {
             System.err.println("Błąd: " + e.getMessage());
         }
 
+        // LAB 3.1 - Zapis i odczyt XML
+        System.out.println("\nLAB 3.1 - XML");
+
+        List<Movie> movies = Arrays.asList(
+                new Movie(1, "Gladiator II", "Akcja"),
+                new Movie(2, "W głowie się nie mieści 2", "Animacja"),
+                new Movie(3, "Dune: Część druga", "Sci-Fi"),
+                new Movie(4, "Joker: Folie à deux", "Dramat")
+        );
+
+        Path xmlPath = Paths.get("movies.xml");
+
+        try {
+            // Zapis listy do XML
+            MovieXmlService.saveMovies(movies, xmlPath);
+            System.out.println("Zapisano filmy do XML.");
+
+            // Wyświetlenie zawartości XML
+            System.out.println("\nZawartość pliku XML:");
+            System.out.println(Files.readString(xmlPath));
+
+            // Odczyt XML do nowej listy
+            List<Movie> loadedMovies = MovieXmlService.loadMovies(xmlPath);
+
+            System.out.println("Filmy odczytane z XML:");
+            loadedMovies.forEach(System.out::println);
+
+        } catch (Exception e) {
+            System.err.println("Błąd XML: " + e.getMessage());
+        }
+
     }
 }
