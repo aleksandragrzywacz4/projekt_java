@@ -1,14 +1,14 @@
-package pl.cinemahub.cinemahub_jpa;
+package pl.cinemahub;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import pl.cinemahub.cinemahub_jpa.model.Film;
-import pl.cinemahub.cinemahub_jpa.model.Sala;
-import pl.cinemahub.cinemahub_jpa.repository.FilmRepository;
-import pl.cinemahub.cinemahub_jpa.repository.SalaRepository;
+import pl.cinemahub.model.Film;
+import pl.cinemahub.model.Sala;
+import pl.cinemahub.repository.FilmRepository;
+import pl.cinemahub.repository.SalaRepository;
 
 @SpringBootApplication
 public class CinemahubJpaApplication {

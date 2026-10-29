@@ -1,4 +1,4 @@
-package pl.cinemahub.cinemahub_jpa.model;
+package pl.cinemahub.model;
 
 import jakarta.persistence.*;
 

@@ -1,4 +1,4 @@
-package pl.cinemahub.cinemahub_jpa;
+package pl.cinemahub;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
