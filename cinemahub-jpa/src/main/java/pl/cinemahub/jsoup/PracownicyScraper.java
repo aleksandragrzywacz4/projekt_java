@@ -72,6 +72,19 @@ public class PracownicyScraper {
 
             pracownicy.forEach(System.out::println);
         }
+
+        System.out.println("\n=== PRACOWNICY ZE STOPNIEM DR LUB DR INŻ. ===");
+
+        for (Map.Entry<String, List<String>> wpis : zaklady.entrySet()) {
+            System.out.println("\n" + wpis.getKey());
+
+            wpis.getValue().stream()
+                    .filter(pracownik ->
+                            pracownik.startsWith("dr inż. ") ||
+                                    (pracownik.startsWith("dr ") &&
+                                            !pracownik.startsWith("dr hab.")))
+                    .forEach(System.out::println);
+        }
     }
 
     private static String nazwisko(String pracownik) {
