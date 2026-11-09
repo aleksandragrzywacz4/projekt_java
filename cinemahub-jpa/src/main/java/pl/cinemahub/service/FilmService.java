@@ -41,4 +41,45 @@ public class FilmService {
     public void deleteFilm(Long id) {
         filmRepository.deleteById(id);
     }
+
+
+    public long countFilms() {
+        return filmRepository.count();
+    }
+
+    public boolean filmExists(Long id) {
+        if (id == null || id <= 0) {
+            return false;
+        }
+
+        return filmRepository.existsById(id);
+    }
+
+    public List<Film> getActiveFilms() {
+        return filmRepository.findAll().stream()
+                .filter(Film::isAktywny)
+                .toList();
+    }
+
+    public List<Film> getFilmsByGenre(String gatunek) {
+        if (gatunek == null || gatunek.isBlank()) {
+            throw new IllegalArgumentException("Gatunek nie może być pusty");
+        }
+
+        return filmRepository.findAll().stream()
+                .filter(film -> film.getGatunek() != null)
+                .filter(film -> film.getGatunek().equalsIgnoreCase(gatunek.trim()))
+                .toList();
+    }
+
+    public List<Film> getFilmsLongerThan(int minuty) {
+        if (minuty < 0) {
+            throw new IllegalArgumentException("Czas nie może być ujemny");
+        }
+
+        return filmRepository.findAll().stream()
+                .filter(film -> film.getCzasTrwaniaMinuty() > minuty)
+                .toList();
+    }
+
 }
