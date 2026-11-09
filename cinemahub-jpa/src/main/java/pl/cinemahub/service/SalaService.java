@@ -42,4 +42,45 @@ public class SalaService {
     public void deleteSala(Long id) {
         salaRepository.deleteById(id);
     }
+
+
+    public long countSale() {
+        return salaRepository.count();
+    }
+
+    public boolean salaExists(Long id) {
+        if (id == null || id <= 0) {
+            return false;
+        }
+
+        return salaRepository.existsById(id);
+    }
+
+    public List<Sala> getActiveSale() {
+        return salaRepository.findAll().stream()
+                .filter(Sala::isAktywna)
+                .toList();
+    }
+
+    public List<Sala> getSaleWithMinimumSeats(int minMiejsc) {
+        if (minMiejsc < 0) {
+            throw new IllegalArgumentException("Liczba miejsc nie może być ujemna");
+        }
+
+        return salaRepository.findAll().stream()
+                .filter(sala -> sala.getLiczbaMiejsc() >= minMiejsc)
+                .toList();
+    }
+
+    public List<Sala> getSaleByName(String nazwa) {
+        if (nazwa == null || nazwa.isBlank()) {
+            throw new IllegalArgumentException("Nazwa nie może być pusta");
+        }
+
+        return salaRepository.findAll().stream()
+                .filter(sala -> sala.getNazwa() != null)
+                .filter(sala -> sala.getNazwa().equalsIgnoreCase(nazwa.trim()))
+                .toList();
+    }
+
 }
