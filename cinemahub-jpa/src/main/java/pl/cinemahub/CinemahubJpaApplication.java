@@ -5,10 +5,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.cinemahub.model.Film;
 import pl.cinemahub.model.Sala;
+import pl.cinemahub.model.User;
 import pl.cinemahub.repository.FilmRepository;
 import pl.cinemahub.repository.SalaRepository;
+import pl.cinemahub.repository.UserRepository;
 
 @SpringBootApplication
 public class CinemahubJpaApplication {
@@ -36,6 +39,16 @@ public class CinemahubJpaApplication {
 
 			System.out.println("Wszystkie sale w bazie:");
 			salaRepository.findAll().forEach(System.out::println);
+		};
+	}
+	@Bean
+	CommandLineRunner initUsers(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+		return args -> {
+			if (userRepository.findByUsername("admin").isEmpty()) {
+				User admin = new User("admin", passwordEncoder.encode("admin123"), "ADMIN");
+				userRepository.save(admin);
+				System.out.println("Dodano użytkownika admin do bazy z zahaszowanym hasłem");
+			}
 		};
 	}
 
