@@ -10,6 +10,7 @@ import java.net.Socket;
 public class FileClientService {
     private static final String SERVER_IP = "127.0.0.1";
     private static final int PORT = 5000;
+    private final Vigenere cipher = new Vigenere();
 
     public String fetchServerData() {
         System.out.println("Łączenie z serwerem pod adresem " + SERVER_IP + ":" + PORT + "...");
@@ -30,7 +31,8 @@ public class FileClientService {
             return "Błąd pobierania danych";
         }
 
-        return response.toString().trim();
+        String encryptedText = response.toString().trim();
+        return cipher.decrypt(encryptedText);
     }
 
 }

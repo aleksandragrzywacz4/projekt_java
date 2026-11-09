@@ -11,6 +11,7 @@ import java.nio.file.Path;
 public class FileServerService {
     private static final int PORT = 5000;
     private static final String DATA_FILE_PATH = "server_data.txt";
+    private final Vigenere cipher = new Vigenere();
 
     public void startServer() {
         System.out.println("Uruchamianie serwera plików na porcie " + PORT);
@@ -24,8 +25,10 @@ public class FileServerService {
 
                     System.out.println("Klient połączył się: " + clientSocket.getInetAddress());
                     String fileContent = Files.readString(Path.of(DATA_FILE_PATH));
-                    writer.println(fileContent);
-                    System.out.println("Dane zostały przesłane do klienta");
+
+                    String encryptedContent = cipher.encrypt(fileContent);
+                    writer.println(encryptedContent);
+                    System.out.println("Zaszyfrowane dane zostały przesłane do klienta");
 
                 } catch (IOException e) {
                     System.err.println("Błąd obsługi klienta: " + e.getMessage());
